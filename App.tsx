@@ -6,7 +6,8 @@
 import React from "react";
 import { StatusBar, StyleSheet, useColorScheme, View } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import SplashScreen from "./src/screens/SplashScreen";
+// import SplashScreen from "./src/screens/SplashScreen";
+import Signup from "./src/screens/Signup";
 
 const App: React.FC = () => {
   const isDarkMode = useColorScheme() === "dark";
@@ -15,7 +16,8 @@ const App: React.FC = () => {
     <SafeAreaProvider>
       <StatusBar barStyle={isDarkMode ? "light-content" : "dark-content"} />
       <View style={styles.container}>
-        <SplashScreen />
+        {/* <SplashScreen /> */}
+        <Signup />
       </View>
     </SafeAreaProvider>
   );

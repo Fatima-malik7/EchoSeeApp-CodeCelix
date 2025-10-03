@@ -1,30 +1,25 @@
-/**
- * EchoSee App Entry
- * Splash screen first
- */
-
 import React from "react";
-import { StatusBar, StyleSheet, useColorScheme, View } from "react-native";
-import { SafeAreaProvider } from "react-native-safe-area-context";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import SplashScreen from "./src/screens/SplashScreen";
+import OnboardingScreen from "./src/screens/OnboardingScreen";
 
-const App: React.FC = () => {
-  const isDarkMode = useColorScheme() === "dark";
-
-  return (
-    <SafeAreaProvider>
-      <StatusBar barStyle={isDarkMode ? "light-content" : "dark-content"} />
-      <View style={styles.container}>
-        <SplashScreen />
-      </View>
-    </SafeAreaProvider>
-  );
+export type RootStackParamList = {
+  Splash: undefined;
+  Onboarding: undefined;
 };
 
-export default App;
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
+function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="Splash" component={SplashScreen} />
+        <Stack.Screen name="Onboarding" component={OnboardingScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+
+export default App;

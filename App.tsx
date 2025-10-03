@@ -8,8 +8,8 @@ import { StatusBar, StyleSheet, useColorScheme, View } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 // import SplashScreen from "./src/screens/SplashScreen";
 // import Signup from "./src/screens/Signup";
-import LoginScreen from './src/screens/LoginScreen';
-
+//import LoginScreen from './src/screens/LoginScreen';
+ import HomeScreen from './src/screens/HomeScreen';
 const App: React.FC = () => {
   const isDarkMode = useColorScheme() === "dark";
 
@@ -18,8 +18,9 @@ const App: React.FC = () => {
       <StatusBar barStyle={isDarkMode ? "light-content" : "dark-content"} />
       <View style={styles.container}>
         {/* <SplashScreen /> */}
-        <LoginScreen />
+        {/* <LoginScreen /> */}
         {/* <Signup /> */}
+        <HomeScreen />
       </View>
     </SafeAreaProvider>
   );

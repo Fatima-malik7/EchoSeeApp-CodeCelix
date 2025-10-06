@@ -9,10 +9,8 @@ import {
 } from "react-native";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import { useNavigation } from "@react-navigation/native";
 
 const Signup = () => {
-  const navigation = useNavigation();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -23,7 +21,7 @@ const Signup = () => {
     <ScrollView contentContainerStyle={styles.container}>
       {/* Header */}
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
+        <TouchableOpacity>
           <Ionicons name="arrow-back" size={22} color="#000" />
         </TouchableOpacity>
         <Text style={styles.helpText}>Need some help?</Text>
@@ -86,12 +84,7 @@ const Signup = () => {
       {/* Login Link */}
       <Text style={styles.loginText}>
         Already have an account?{" "}
-        <Text
-          style={styles.loginLink}
-          onPress={() => navigation.navigate("Login")}
-        >
-          Login
-        </Text>
+        <Text style={styles.loginLink}>Login</Text>
       </Text>
 
       {/* OR Divider */}

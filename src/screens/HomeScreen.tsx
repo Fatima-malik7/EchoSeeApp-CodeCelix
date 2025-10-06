@@ -29,25 +29,25 @@ const HomeScreen: React.FC = () => {
 
       <ScrollView contentContainerStyle={{ padding: 15 }}>
         {/* Language Section */}
-        <View style={styles.card}>
-          <View style={styles.cardHeader}>
-            <Text style={styles.cardTitle}>Language</Text>
-            <Ionicons name="language" size={20} color="#007BFF" />
+        <View style={styles.section}>
+          <View style={styles.sectionHeader}>
+            <Text style={styles.sectionTitle}>Language</Text>
+            <Ionicons name="language-outline" size={20} color="#007BFF" />
           </View>
-          <View style={styles.languageContainer}>
+          <View style={styles.languageGrid}>
             {["English", "اردو", "汉语", "Español"].map((lang) => (
               <TouchableOpacity
                 key={lang}
                 style={[
                   styles.languageBtn,
-                  selectedLanguage === lang && styles.languageSelected,
+                  selectedLanguage === lang && styles.selectedLanguage,
                 ]}
                 onPress={() => setSelectedLanguage(lang)}
               >
                 <Text
                   style={[
                     styles.languageText,
-                    selectedLanguage === lang && styles.languageSelectedText,
+                    selectedLanguage === lang && styles.selectedLanguageText,
                   ]}
                 >
                   {lang}
@@ -67,9 +67,7 @@ const HomeScreen: React.FC = () => {
             </View>
           </View>
           <TouchableOpacity style={styles.subtitleBox}>
-            <Text style={{ color: "#999" }}>
-              Press start to begin live subtitle
-            </Text>
+            <Text style={{ color: "#999" }}>Press start to begin live subtitle</Text>
           </TouchableOpacity>
         </View>
 
@@ -122,6 +120,8 @@ export default HomeScreen;
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: "#fff" },
+
+  // Header
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -143,6 +143,42 @@ const styles = StyleSheet.create({
   avatarText: { color: "#fff", fontWeight: "bold" },
   appName: { fontSize: 18, fontWeight: "bold" },
   status: { color: "red", fontWeight: "600" },
+
+  // Section
+  section: {
+    backgroundColor: "#fff",
+    borderRadius: 10,
+    padding: 15,
+    marginBottom: 15,
+    borderWidth: 1,
+    borderColor: "#eee",
+  },
+  sectionHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 10,
+  },
+  sectionTitle: { fontSize: 16, fontWeight: "bold" },
+
+  languageGrid: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+  },
+  languageBtn: {
+    backgroundColor: "#f2f2f2",
+    paddingVertical: 12,
+    borderRadius: 8,
+    alignItems: "center",
+    width: "48%",
+    marginVertical: 5,
+  },
+  selectedLanguage: { backgroundColor: "#007BFF" },
+  languageText: { color: "#333", fontWeight: "500" },
+  selectedLanguageText: { color: "#fff" },
+
+  // Card
   card: {
     backgroundColor: "#fff",
     borderRadius: 10,
@@ -157,22 +193,7 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   cardTitle: { fontSize: 16, fontWeight: "bold" },
-  languageContainer: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    gap: 10,
-  },
-  languageBtn: {
-    flex: 1,
-    backgroundColor: "#f2f2f2",
-    padding: 12,
-    margin: 5,
-    borderRadius: 8,
-    alignItems: "center",
-  },
-  languageSelected: { backgroundColor: "#007BFF" },
-  languageText: { color: "#333", fontWeight: "500" },
-  languageSelectedText: { color: "#fff" },
+
   subtitleBox: {
     borderWidth: 1,
     borderColor: "#ddd",
@@ -180,6 +201,8 @@ const styles = StyleSheet.create({
     padding: 15,
     alignItems: "center",
   },
+
+  // Options
   optionsRow: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -194,6 +217,8 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   optionText: { marginTop: 5, fontSize: 14, color: "#333" },
+
+  // Play Button
   playBtn: {
     backgroundColor: "#007BFF",
     width: 70,
@@ -204,6 +229,8 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     marginVertical: 20,
   },
+
+  // Bottom Navigation
   bottomNav: {
     flexDirection: "row",
     justifyContent: "space-around",

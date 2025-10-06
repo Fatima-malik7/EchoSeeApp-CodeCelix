@@ -32,7 +32,7 @@ const HomeScreen: React.FC = () => {
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
             <Text style={styles.sectionTitle}>Language</Text>
-            <Ionicons name="language-outline" size={20} color="#007BFF" />
+            <Ionicons name="language-outline" size={20} color="#00BFFF" />
           </View>
           <View style={styles.languageGrid}>
             {["English", "اردو", "汉语", "Español"].map((lang) => (
@@ -62,8 +62,8 @@ const HomeScreen: React.FC = () => {
           <View style={styles.cardHeader}>
             <Text style={styles.cardTitle}>Live Subtitles</Text>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <Ionicons name="mic" size={20} color="#007BFF" />
-              <Text style={{ marginLeft: 5 }}>EN</Text>
+              <Ionicons name="mic" size={20} color="#00BFFF" />
+              <Text style={{ marginLeft: 5, color: "#fff" }}>EN</Text>
             </View>
           </View>
           <TouchableOpacity style={styles.subtitleBox}>
@@ -74,11 +74,11 @@ const HomeScreen: React.FC = () => {
         {/* Save & Font Size */}
         <View style={styles.optionsRow}>
           <TouchableOpacity style={styles.optionCard}>
-            <Ionicons name="save" size={28} color="#007BFF" />
+            <Ionicons name="save-outline" size={28} color="#00BFFF" />
             <Text style={styles.optionText}>Save Last 5</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.optionCard}>
-            <FontAwesome name="text-height" size={28} color="#007BFF" />
+            <FontAwesome name="font" size={28} color="#00BFFF" />
             <Text style={styles.optionText}>Font Size</Text>
           </TouchableOpacity>
         </View>
@@ -92,23 +92,23 @@ const HomeScreen: React.FC = () => {
       {/* Bottom Navigation */}
       <View style={styles.bottomNav}>
         <TouchableOpacity style={styles.navItem}>
-          <Ionicons name="home" size={24} color="#007BFF" />
+          <Ionicons name="home" size={24} color="#00BFFF" />
           <Text style={styles.navTextActive}>Home</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.navItem}>
-          <MaterialIcons name="article" size={24} color="#666" />
+          <MaterialIcons name="article" size={24} color="#999" />
           <Text style={styles.navText}>Transcripts</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.navItem}>
-          <Ionicons name="hardware-chip" size={24} color="#666" />
+          <Ionicons name="hardware-chip" size={24} color="#999" />
           <Text style={styles.navText}>Devices</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.navItem}>
-          <Ionicons name="star" size={24} color="#666" />
+          <Ionicons name="star" size={24} color="#999" />
           <Text style={styles.navText}>Premium</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.navItem}>
-          <Ionicons name="settings" size={24} color="#666" />
+          <Ionicons name="settings" size={24} color="#999" />
           <Text style={styles.navText}>Settings</Text>
         </TouchableOpacity>
       </View>
@@ -119,7 +119,7 @@ const HomeScreen: React.FC = () => {
 export default HomeScreen;
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#fff" },
+  container: { flex: 1, backgroundColor: "#000" },
 
   // Header
   header: {
@@ -128,11 +128,11 @@ const styles = StyleSheet.create({
     padding: 15,
     alignItems: "center",
     borderBottomWidth: 1,
-    borderColor: "#eee",
+    borderColor: "#222",
   },
   headerLeft: { flexDirection: "row", alignItems: "center" },
   avatar: {
-    backgroundColor: "#007BFF",
+    backgroundColor: "#00BFFF",
     width: 35,
     height: 35,
     borderRadius: 18,
@@ -141,17 +141,17 @@ const styles = StyleSheet.create({
     marginRight: 8,
   },
   avatarText: { color: "#fff", fontWeight: "bold" },
-  appName: { fontSize: 18, fontWeight: "bold" },
+  appName: { fontSize: 18, fontWeight: "bold", color: "#fff" },
   status: { color: "red", fontWeight: "600" },
 
   // Section
   section: {
-    backgroundColor: "#fff",
+    backgroundColor: "#111",
     borderRadius: 10,
     padding: 15,
     marginBottom: 15,
     borderWidth: 1,
-    borderColor: "#eee",
+    borderColor: "#222",
   },
   sectionHeader: {
     flexDirection: "row",
@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: 10,
   },
-  sectionTitle: { fontSize: 16, fontWeight: "bold" },
+  sectionTitle: { fontSize: 16, fontWeight: "bold", color: "#fff" },
 
   languageGrid: {
     flexDirection: "row",
@@ -167,36 +167,36 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   languageBtn: {
-    backgroundColor: "#f2f2f2",
+    backgroundColor: "#1a1a1a",
     paddingVertical: 12,
     borderRadius: 8,
     alignItems: "center",
     width: "48%",
     marginVertical: 5,
   },
-  selectedLanguage: { backgroundColor: "#007BFF" },
-  languageText: { color: "#333", fontWeight: "500" },
+  selectedLanguage: { backgroundColor: "#00BFFF" },
+  languageText: { color: "#ccc", fontWeight: "500" },
   selectedLanguageText: { color: "#fff" },
 
   // Card
   card: {
-    backgroundColor: "#fff",
+    backgroundColor: "#111",
     borderRadius: 10,
     padding: 15,
     marginBottom: 15,
     borderWidth: 1,
-    borderColor: "#eee",
+    borderColor: "#222",
   },
   cardHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
     marginBottom: 12,
   },
-  cardTitle: { fontSize: 16, fontWeight: "bold" },
+  cardTitle: { fontSize: 16, fontWeight: "bold", color: "#fff" },
 
   subtitleBox: {
     borderWidth: 1,
-    borderColor: "#ddd",
+    borderColor: "#333",
     borderRadius: 10,
     padding: 15,
     alignItems: "center",
@@ -210,17 +210,17 @@ const styles = StyleSheet.create({
   },
   optionCard: {
     flex: 1,
-    backgroundColor: "#f5f5f5",
+    backgroundColor: "#1a1a1a",
     marginHorizontal: 5,
     borderRadius: 10,
     alignItems: "center",
     padding: 20,
   },
-  optionText: { marginTop: 5, fontSize: 14, color: "#333" },
+  optionText: { marginTop: 5, fontSize: 14, color: "#fff" },
 
   // Play Button
   playBtn: {
-    backgroundColor: "#007BFF",
+    backgroundColor: "#00BFFF",
     width: 70,
     height: 70,
     borderRadius: 35,
@@ -236,9 +236,10 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     paddingVertical: 8,
     borderTopWidth: 1,
-    borderColor: "#eee",
+    borderColor: "#222",
+    backgroundColor: "#000",
   },
   navItem: { alignItems: "center" },
-  navText: { fontSize: 12, color: "#666" },
-  navTextActive: { fontSize: 12, color: "#007BFF", fontWeight: "bold" },
+  navText: { fontSize: 12, color: "#999" },
+  navTextActive: { fontSize: 12, color: "#00BFFF", fontWeight: "bold" },
 });

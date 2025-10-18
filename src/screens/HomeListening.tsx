@@ -7,6 +7,7 @@ import {
   ScrollView,
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
@@ -96,18 +97,23 @@ const HomeListening: React.FC = () => {
           <Ionicons name="home" size={22} color="#4da6ff" />
           <Text style={styles.navLabelActive}>Home</Text>
         </TouchableOpacity>
+
         <TouchableOpacity style={styles.navItem}>
           <Ionicons name="document-text-outline" size={22} color="#888" />
           <Text style={styles.navLabel}>Transcripts</Text>
         </TouchableOpacity>
+
         <TouchableOpacity style={styles.navItem}>
           <Ionicons name="bluetooth-outline" size={22} color="#888" />
           <Text style={styles.navLabel}>Devices</Text>
         </TouchableOpacity>
+
+        {/* 👑 Premium Tab (Gold Crown) */}
         <TouchableOpacity style={styles.navItem}>
-          <Ionicons name="star-outline" size={22} color="#888" />
-          <Text style={styles.navLabel}>Premium</Text>
+          <FontAwesome5 name="crown" size={20} color="#FFD700" />
+          <Text style={[styles.navLabel, { color: "#FFD700" }]}>Premium</Text>
         </TouchableOpacity>
+
         <TouchableOpacity style={styles.navItem}>
           <Ionicons name="settings-outline" size={22} color="#888" />
           <Text style={styles.navLabel}>Settings</Text>

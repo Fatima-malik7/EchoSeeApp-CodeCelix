@@ -1,11 +1,15 @@
 import React from "react";
 import { StatusBar, StyleSheet, View } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+// import SettingsScreen from "./src/screens/SettingsScreen";
+// import DevicePairingScreen from "./src/screens/DevicePairingScreen";
+// import DevicePairing from "./src/screens/DevicePairing";
 // import HomeListening from "./src/screens/HomeListening";
 // import HomeScreen from "./src/screens/HomeScreen";
 // import Signup from "./src/screens/Signup";
-import TranscriptScreen from "./src/screens/TranscriptScreen";
+// import TranscriptScreen from "./src/screens/TranscriptScreen";
 // import LoginScreen from "./src/screens/LoginScreen";
+  import PremiumScreen from "./src/screens/PremiumScreen";
 
 const App: React.FC = () => {
   return (
@@ -16,7 +20,11 @@ const App: React.FC = () => {
         {/* <HomeScreen /> */}
         {/* <LoginScreen /> */}
         {/* <Signup /> */}
-        <TranscriptScreen />
+        {/* <TranscriptScreen /> */}
+        {/* <DevicePairing /> */}
+        {/* <DevicePairingScreen /> */}
+        {/* <SettingsScreen /> */}
+        <PremiumScreen />
       </View>
     </SafeAreaProvider>
   );

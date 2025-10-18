@@ -8,7 +8,9 @@ import {
   FlatList,
   SafeAreaView,
 } from "react-native";
-import Icon from "react-native-vector-icons/Ionicons";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
 const transcripts = [
   {
@@ -16,13 +18,14 @@ const transcripts = [
     title: "Team Meeting",
     time: "Today, 2:45 PM",
     duration: "25 min",
-    description: "Let's discuss the quarterly results and upcoming project deadlines...",
+    description:
+      "Let's discuss the quarterly results and upcoming project deadlines...",
     speakers: 3,
   },
   {
     id: "2",
     title: "Coffee Chat",
-    time: "Today, 11:35 PM",
+    time: "Today, 11:35 AM",
     duration: "12 min",
     description: "How was your weekend? I went hiking in the mountains...",
     speakers: 2,
@@ -37,17 +40,17 @@ const transcripts = [
   },
 ];
 
-const TranscriptScreen: React.FC = () => {
+const Transcripts: React.FC = () => {
   const renderItem = ({ item }: any) => (
     <View style={styles.card}>
       <View style={styles.cardHeader}>
         <Text style={styles.cardTitle}>{item.title}</Text>
         <TouchableOpacity>
-          <Icon name="download-outline" size={20} color="#16C784" />
+          <Ionicons name="download-outline" size={20} color="#16C784" />
         </TouchableOpacity>
       </View>
       <Text style={styles.cardTime}>
-        {item.time}  •  <Text style={styles.cardDuration}>{item.duration}</Text>
+        {item.time} • <Text style={styles.cardDuration}>{item.duration}</Text>
       </Text>
       <Text style={styles.cardDescription}>{item.description}</Text>
       <View style={styles.speakersRow}>
@@ -73,13 +76,13 @@ const TranscriptScreen: React.FC = () => {
       <View style={styles.header}>
         <Text style={styles.title}>Transcripts</Text>
         <TouchableOpacity>
-          <Icon name="ellipsis-horizontal" size={22} color="#fff" />
+          <Ionicons name="ellipsis-horizontal" size={22} color="#fff" />
         </TouchableOpacity>
       </View>
 
-      {/* Search */}
+      {/* Search Bar */}
       <View style={styles.searchContainer}>
-        <Icon name="search-outline" size={18} color="#888" style={{ marginRight: 6 }} />
+        <Ionicons name="search-outline" size={18} color="#888" />
         <TextInput
           placeholder="Search transcripts..."
           placeholderTextColor="#888"
@@ -103,35 +106,39 @@ const TranscriptScreen: React.FC = () => {
         </View>
       </View>
 
-      {/* List */}
+      {/* Transcript List */}
       <FlatList
         data={transcripts}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
-        contentContainerStyle={{ paddingBottom: 80 }}
+        contentContainerStyle={{ paddingBottom: 90 }}
         showsVerticalScrollIndicator={false}
       />
 
       {/* Bottom Navigation */}
       <View style={styles.bottomNav}>
         <TouchableOpacity style={styles.navItem}>
-          <Icon name="home-outline" size={22} color="#fff" />
+          <Ionicons name="home-outline" size={22} color="#999" />
           <Text style={styles.navText}>Home</Text>
         </TouchableOpacity>
+
         <TouchableOpacity style={[styles.navItem, styles.activeNav]}>
-          <Icon name="document-text-outline" size={22} color="#007BFF" />
-          <Text style={[styles.navText, { color: "#007BFF" }]}>Transcripts</Text>
+          <MaterialIcons name="article" size={22} color="#3A86FF" />
+          <Text style={styles.navTextActive}>Transcripts</Text>
         </TouchableOpacity>
+
         <TouchableOpacity style={styles.navItem}>
-          <Icon name="mic-outline" size={22} color="#fff" />
+          <Ionicons name="hardware-chip-outline" size={22} color="#999" />
           <Text style={styles.navText}>Devices</Text>
         </TouchableOpacity>
+
         <TouchableOpacity style={styles.navItem}>
-          <Icon name="star-outline" size={22} color="#fff" />
-          <Text style={styles.navText}>Premium</Text>
+          <FontAwesome5 name="crown" size={20} color="#FFD700" />
+          <Text style={[styles.navText, { color: "#FFD700" }]}>Premium</Text>
         </TouchableOpacity>
+
         <TouchableOpacity style={styles.navItem}>
-          <Icon name="settings-outline" size={22} color="#fff" />
+          <Ionicons name="settings-outline" size={22} color="#999" />
           <Text style={styles.navText}>Settings</Text>
         </TouchableOpacity>
       </View>
@@ -139,7 +146,7 @@ const TranscriptScreen: React.FC = () => {
   );
 };
 
-export default TranscriptScreen;
+export default Transcripts;
 
 const styles = StyleSheet.create({
   container: {
@@ -170,6 +177,7 @@ const styles = StyleSheet.create({
   searchInput: {
     flex: 1,
     color: "#fff",
+    marginLeft: 6,
   },
   statsRow: {
     flexDirection: "row",
@@ -266,11 +274,16 @@ const styles = StyleSheet.create({
   },
   activeNav: {
     borderTopWidth: 2,
-    borderTopColor: "#007BFF",
+    borderTopColor: "#3A86FF",
     paddingTop: 5,
   },
   navText: {
     color: "#A0A0A0",
+    fontSize: 12,
+    marginTop: 2,
+  },
+  navTextActive: {
+    color: "#3A86FF",
     fontSize: 12,
     marginTop: 2,
   },

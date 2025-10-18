@@ -1,4 +1,3 @@
-// src/screens/HomeScreen.tsx
 import React, { useState } from "react";
 import {
   View,
@@ -10,6 +9,7 @@ import {
 import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
 const HomeScreen: React.FC = () => {
   const [selectedLanguage, setSelectedLanguage] = useState("English");
@@ -67,7 +67,9 @@ const HomeScreen: React.FC = () => {
             </View>
           </View>
           <TouchableOpacity style={styles.subtitleBox}>
-            <Text style={{ color: "#999" }}>Press start to begin live subtitle</Text>
+            <Text style={{ color: "#999" }}>
+              Press start to begin live subtitle
+            </Text>
           </TouchableOpacity>
         </View>
 
@@ -92,23 +94,28 @@ const HomeScreen: React.FC = () => {
       {/* Bottom Navigation */}
       <View style={styles.bottomNav}>
         <TouchableOpacity style={styles.navItem}>
-          <Ionicons name="home" size={24} color="#00BFFF" />
+          <Ionicons name="home" size={22} color="#00BFFF" />
           <Text style={styles.navTextActive}>Home</Text>
         </TouchableOpacity>
+
         <TouchableOpacity style={styles.navItem}>
-          <MaterialIcons name="article" size={24} color="#999" />
+          <MaterialIcons name="article" size={22} color="#999" />
           <Text style={styles.navText}>Transcripts</Text>
         </TouchableOpacity>
+
         <TouchableOpacity style={styles.navItem}>
-          <Ionicons name="hardware-chip" size={24} color="#999" />
+          <Ionicons name="hardware-chip-outline" size={22} color="#999" />
           <Text style={styles.navText}>Devices</Text>
         </TouchableOpacity>
+
+        {/* 👑 Premium Tab */}
         <TouchableOpacity style={styles.navItem}>
-          <Ionicons name="star" size={24} color="#999" />
-          <Text style={styles.navText}>Premium</Text>
+          <FontAwesome5 name="crown" size={20} color="#FFD700" />
+          <Text style={[styles.navText, { color: "#FFD700" }]}>Premium</Text>
         </TouchableOpacity>
+
         <TouchableOpacity style={styles.navItem}>
-          <Ionicons name="settings" size={24} color="#999" />
+          <Ionicons name="settings-outline" size={22} color="#999" />
           <Text style={styles.navText}>Settings</Text>
         </TouchableOpacity>
       </View>
@@ -193,7 +200,6 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   cardTitle: { fontSize: 16, fontWeight: "bold", color: "#fff" },
-
   subtitleBox: {
     borderWidth: 1,
     borderColor: "#333",
@@ -237,7 +243,7 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     borderTopWidth: 1,
     borderColor: "#222",
-    backgroundColor: "#000",
+    backgroundColor: "#111",
   },
   navItem: { alignItems: "center" },
   navText: { fontSize: 12, color: "#999" },

@@ -1,56 +1,65 @@
-import React from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  ImageBackground,
-  StatusBar,
-} from "react-native";
+import React, { useEffect } from "react";
+import { View, ImageBackground, StyleSheet, Text, ActivityIndicator } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import type { RootStackParamList } from "../../App";
 
-//Explicitly type the component as React.FC (functional component)
+type SplashScreenNavigationProp = NativeStackNavigationProp<
+RootStackParamList,
+"Login"
+
+>;
+
 const SplashScreen: React.FC = () => {
-  return (
-    <View style={styles.container}>
-      <StatusBar barStyle="light-content" backgroundColor="#BFD8F6" />
+const navigation = useNavigation<SplashScreenNavigationProp>();
 
-      {/* Full Background Image */}
-      <ImageBackground
-        source={require("../assets/SplashScreen.png")}
-        style={styles.background}
-        resizeMode="cover"
-      >
-        {/* If your background already has logo + text, remove below */}
-        <View style={styles.centerContent}>
-          <Text style={styles.title}>
-            Echo<Text style={styles.highlight}>See</Text>
-          </Text>
-        </View>
-      </ImageBackground>
-    </View>
-  );
+useEffect(() => {
+const timer = setTimeout(() => {
+navigation.replace("Login");
+}, 2500); // 2.5 seconds delay
+
+return () => clearTimeout(timer);
+
+
+}, [navigation]);
+
+return (
+<ImageBackground
+source={require("../../assets/splash-bg.png")}
+style={styles.background}
+resizeMode="cover"
+>
+<View style={styles.overlay}>
+<Text style={styles.title}>EchoSee</Text>
+<ActivityIndicator size="large" color="#fff" style={styles.indicator} />
+</View>
+</ImageBackground>
+);
 };
+
 
 export default SplashScreen;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  background: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  centerContent: {
-    alignItems: "center",
-    marginTop: 20,
-  },
-  title: {
-    fontSize: 32,
-    fontWeight: "bold",
-    color: "#0B2A75",
-  },
-  highlight: {
-    color: "#1D73E8",
-  },
+background: {
+flex: 1,
+justifyContent: "center",
+alignItems: "center",
+},
+overlay: {
+backgroundColor: "rgba(0,0,0,0.5)",
+width: "100%",
+height: "100%",
+justifyContent: "center",
+alignItems: "center",
+},
+title: {
+fontSize: 40,
+color: "#fff",
+fontWeight: "bold",
+letterSpacing: 1.5,
+},
+indicator: {
+marginTop: 20,
+},
 });

@@ -1,3 +1,4 @@
+
 import React from "react";
 import {
   View,
@@ -7,10 +8,28 @@ import {
   TouchableOpacity,
   FlatList,
   SafeAreaView,
+  Alert,
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+
+// 👇 Define navigation types
+type RootStackParamList = {
+  Login: undefined;
+  Signup: undefined;
+  HomeScreen: undefined;
+  HomeListening: undefined;
+  Transcripts: undefined;
+  TranscriptDetail: { transcript: any };
+  DevicePairing: undefined;          // ✅ Add this
+  DevicePairingScreen: undefined;    // ✅ Add this
+  Premium: undefined;
+  Settings: undefined;
+};
+type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 const transcripts = [
   {
@@ -41,11 +60,21 @@ const transcripts = [
 ];
 
 const Transcripts: React.FC = () => {
+  const navigation = useNavigation<NavigationProp>();
+
+  const handleDownload = (title: string) => {
+    Alert.alert("Download", `Downloading "${title}" transcript...`);
+    // You can later integrate actual download logic here (e.g. from server or local storage)
+  };
+
   const renderItem = ({ item }: any) => (
-    <View style={styles.card}>
+    <TouchableOpacity
+      style={styles.card}
+      onPress={() => navigation.navigate("TranscriptDetail", { transcript: item })}
+    >
       <View style={styles.cardHeader}>
         <Text style={styles.cardTitle}>{item.title}</Text>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => handleDownload(item.title)}>
           <Ionicons name="download-outline" size={20} color="#16C784" />
         </TouchableOpacity>
       </View>
@@ -67,7 +96,7 @@ const Transcripts: React.FC = () => {
         </View>
         <Text style={styles.speakersCount}>{item.speakers} speakers</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 
   return (
@@ -97,7 +126,9 @@ const Transcripts: React.FC = () => {
           <Text style={styles.statLabel}>Total</Text>
         </View>
         <View style={styles.statBox}>
-          <Text style={[styles.statNumber, { color: "#16C784" }]}>2h{"\n"}20m</Text>
+          <Text style={[styles.statNumber, { color: "#16C784" }]}>
+            2h{"\n"}20m
+          </Text>
           <Text style={styles.statLabel}>Duration</Text>
         </View>
         <View style={styles.statBox}>
@@ -117,27 +148,43 @@ const Transcripts: React.FC = () => {
 
       {/* Bottom Navigation */}
       <View style={styles.bottomNav}>
-        <TouchableOpacity style={styles.navItem}>
+        <TouchableOpacity
+          style={styles.navItem}
+          onPress={() => navigation.navigate("HomeScreen")}
+        >
           <Ionicons name="home-outline" size={22} color="#999" />
           <Text style={styles.navText}>Home</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={[styles.navItem, styles.activeNav]}>
+        <TouchableOpacity
+          style={[styles.navItem, styles.activeNav]}
+          onPress={() => navigation.navigate("Transcripts")}
+        >
           <MaterialIcons name="article" size={22} color="#3A86FF" />
           <Text style={styles.navTextActive}>Transcripts</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.navItem}>
-          <Ionicons name="hardware-chip-outline" size={22} color="#999" />
-          <Text style={styles.navText}>Devices</Text>
-        </TouchableOpacity>
+       <TouchableOpacity
+  style={styles.navItem}
+  onPress={() => navigation.navigate("DevicePairing")}
+>
+  <Ionicons name="hardware-chip-outline" size={22} color="#999" />
+  <Text style={styles.navText}>Devices</Text>
+</TouchableOpacity>
 
-        <TouchableOpacity style={styles.navItem}>
+
+        <TouchableOpacity
+          style={styles.navItem}
+          onPress={() => navigation.navigate("Premium")}
+        >
           <FontAwesome5 name="crown" size={20} color="#FFD700" />
           <Text style={[styles.navText, { color: "#FFD700" }]}>Premium</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.navItem}>
+        <TouchableOpacity
+          style={styles.navItem}
+          onPress={() => navigation.navigate("Settings")}
+        >
           <Ionicons name="settings-outline" size={22} color="#999" />
           <Text style={styles.navText}>Settings</Text>
         </TouchableOpacity>
@@ -149,22 +196,14 @@ const Transcripts: React.FC = () => {
 export default Transcripts;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#000",
-    paddingHorizontal: 15,
-  },
+  container: { flex: 1, backgroundColor: "#000", paddingHorizontal: 15 },
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     marginVertical: 10,
   },
-  title: {
-    fontSize: 22,
-    fontWeight: "700",
-    color: "#fff",
-  },
+  title: { fontSize: 22, fontWeight: "700", color: "#fff" },
   searchContainer: {
     flexDirection: "row",
     alignItems: "center",
@@ -174,11 +213,7 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     marginBottom: 15,
   },
-  searchInput: {
-    flex: 1,
-    color: "#fff",
-    marginLeft: 6,
-  },
+  searchInput: { flex: 1, color: "#fff", marginLeft: 6 },
   statsRow: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -198,11 +233,7 @@ const styles = StyleSheet.create({
     color: "#fff",
     textAlign: "center",
   },
-  statLabel: {
-    fontSize: 13,
-    color: "#A0A0A0",
-    textAlign: "center",
-  },
+  statLabel: { fontSize: 13, color: "#A0A0A0", textAlign: "center" },
   card: {
     backgroundColor: "#1C1C1E",
     borderRadius: 12,
@@ -214,31 +245,16 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     marginBottom: 5,
   },
-  cardTitle: {
-    color: "#fff",
-    fontSize: 16,
-    fontWeight: "600",
-  },
-  cardTime: {
-    color: "#A0A0A0",
-    fontSize: 13,
-  },
-  cardDuration: {
-    color: "#F79E1B",
-  },
-  cardDescription: {
-    color: "#ccc",
-    fontSize: 13,
-    marginVertical: 5,
-  },
+  cardTitle: { color: "#fff", fontSize: 16, fontWeight: "600" },
+  cardTime: { color: "#A0A0A0", fontSize: 13 },
+  cardDuration: { color: "#F79E1B" },
+  cardDescription: { color: "#ccc", fontSize: 13, marginVertical: 5 },
   speakersRow: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
   },
-  avatars: {
-    flexDirection: "row",
-  },
+  avatars: { flexDirection: "row" },
   avatar: {
     width: 26,
     height: 26,
@@ -247,15 +263,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginRight: 4,
   },
-  avatarText: {
-    color: "#fff",
-    fontSize: 12,
-    fontWeight: "700",
-  },
-  speakersCount: {
-    color: "#A0A0A0",
-    fontSize: 12,
-  },
+  avatarText: { color: "#fff", fontSize: 12, fontWeight: "700" },
+  speakersCount: { color: "#A0A0A0", fontSize: 12 },
   bottomNav: {
     flexDirection: "row",
     justifyContent: "space-around",
@@ -269,22 +278,8 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
   },
-  navItem: {
-    alignItems: "center",
-  },
-  activeNav: {
-    borderTopWidth: 2,
-    borderTopColor: "#3A86FF",
-    paddingTop: 5,
-  },
-  navText: {
-    color: "#A0A0A0",
-    fontSize: 12,
-    marginTop: 2,
-  },
-  navTextActive: {
-    color: "#3A86FF",
-    fontSize: 12,
-    marginTop: 2,
-  },
+  navItem: { alignItems: "center" },
+  activeNav: { borderTopWidth: 2, borderTopColor: "#3A86FF", paddingTop: 5 },
+  navText: { color: "#A0A0A0", fontSize: 12, marginTop: 2 },
+  navTextActive: { color: "#3A86FF", fontSize: 12, marginTop: 2 },
 });

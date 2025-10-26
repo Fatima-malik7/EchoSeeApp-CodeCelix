@@ -10,9 +10,14 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import { useNavigation } from "@react-navigation/native";
+import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import type { RootStackParamList } from "../../App"; // adjust path if needed
+
 
 const HomeListening: React.FC = () => {
   const [language, setLanguage] = useState("English");
+const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   return (
     <View style={styles.container}>
@@ -84,12 +89,16 @@ const HomeListening: React.FC = () => {
         </View>
       </ScrollView>
 
-      {/* Recording Button */}
-      <View style={styles.recordBtnContainer}>
-        <TouchableOpacity style={styles.recordBtn}>
-          <MaterialIcons name="stop" size={35} color="#fff" />
-        </TouchableOpacity>
-      </View>
+     {/* Recording Button */}
+<View style={styles.recordBtnContainer}>
+  <TouchableOpacity
+    style={styles.recordBtn}
+    onPress={() => navigation.navigate("Transcript")}
+  >
+    <MaterialIcons name="stop" size={35} color="#fff" />
+  </TouchableOpacity>
+</View>
+
 
       {/* Bottom Navigation */}
       <View style={styles.bottomNav}>
@@ -98,10 +107,15 @@ const HomeListening: React.FC = () => {
           <Text style={styles.navLabelActive}>Home</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.navItem}>
-          <Ionicons name="document-text-outline" size={22} color="#888" />
-          <Text style={styles.navLabel}>Transcripts</Text>
-        </TouchableOpacity>
+     <TouchableOpacity
+  style={styles.navItem}
+  onPress={() => navigation.navigate("Transcript")}
+>
+  <Ionicons name="document-text-outline" size={22} color="#4da6ff" />
+  <Text style={styles.navLabelActive}>Transcripts</Text>
+</TouchableOpacity>
+
+
 
         <TouchableOpacity style={styles.navItem}>
           <Ionicons name="bluetooth-outline" size={22} color="#888" />
@@ -244,3 +258,4 @@ const styles = StyleSheet.create({
   navLabel: { color: "#888", fontSize: 12, marginTop: 2 },
   navLabelActive: { color: "#4da6ff", fontSize: 12, marginTop: 2 },
 });
+

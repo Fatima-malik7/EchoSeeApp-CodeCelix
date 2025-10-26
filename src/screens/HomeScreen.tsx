@@ -10,9 +10,19 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import { useNavigation } from "@react-navigation/native";
+import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import type { RootStackParamList } from "../../App";
+
+
+type HomeScreenNavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  "Home"
+>;
 
 const HomeScreen: React.FC = () => {
   const [selectedLanguage, setSelectedLanguage] = useState("English");
+  const navigation = useNavigation<HomeScreenNavigationProp>(); // ✅ typed navigation
 
   return (
     <View style={styles.container}>
@@ -86,9 +96,12 @@ const HomeScreen: React.FC = () => {
         </View>
 
         {/* Play Button */}
-        <TouchableOpacity style={styles.playBtn}>
-          <Ionicons name="play" size={40} color="#fff" />
-        </TouchableOpacity>
+       <TouchableOpacity
+        style={styles.playBtn}
+        onPress={() => navigation.navigate("HomeListening")} // ✅ now works fine
+      >
+        <Ionicons name="play" size={40} color="#fff" />
+      </TouchableOpacity>
       </ScrollView>
 
       {/* Bottom Navigation */}
@@ -249,3 +262,4 @@ const styles = StyleSheet.create({
   navText: { fontSize: 12, color: "#999" },
   navTextActive: { fontSize: 12, color: "#00BFFF", fontWeight: "bold" },
 });
+

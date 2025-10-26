@@ -9,8 +9,11 @@ import {
 import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import { useNavigation } from "@react-navigation/native";
 
 const DevicePairing: React.FC = () => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContent}>
@@ -22,10 +25,15 @@ const DevicePairing: React.FC = () => {
 
         {/* Action Buttons */}
         <View style={styles.actionRow}>
-          <TouchableOpacity style={styles.primaryBtn}>
+          {/* ✅ When you click this, it navigates to DevicePairingScreen */}
+          <TouchableOpacity
+            style={styles.primaryBtn}
+            onPress={() => navigation.navigate("DevicePairingScreen" as never)} // 👈 key change
+          >
             <Ionicons name="scan" size={18} color="#fff" />
             <Text style={styles.btnText}>Scan Devices</Text>
           </TouchableOpacity>
+
           <TouchableOpacity style={styles.secondaryBtn}>
             <Ionicons name="bluetooth" size={18} color="#fff" />
             <Text style={styles.btnText}>Bluetooth Settings</Text>

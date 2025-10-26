@@ -14,7 +14,7 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 const PremiumScreen: React.FC = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView contentContainerStyle={{ padding: 15, paddingBottom: 100 }}>
+      <ScrollView contentContainerStyle={styles.scrollContent}>
         {/* Header */}
         <View style={styles.header}>
           <Text style={styles.title}>Premium Plans</Text>
@@ -125,12 +125,16 @@ const PremiumScreen: React.FC = () => {
   );
 };
 
-export default PremiumScreen;
+
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#000",
+  },
+  scrollContent: {
+    padding: 15,
+    paddingBottom: 100,
   },
   header: {
     alignItems: "center",
@@ -314,3 +318,4 @@ const styles = StyleSheet.create({
   navText: { fontSize: 12, color: "#999" },
   navTextActive: { fontSize: 12, color: "#3A86FF", fontWeight: "bold" },
 });
+export default PremiumScreen;

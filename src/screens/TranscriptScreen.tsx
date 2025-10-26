@@ -150,7 +150,7 @@ const Transcripts: React.FC = () => {
       <View style={styles.bottomNav}>
         <TouchableOpacity
           style={styles.navItem}
-          onPress={() => navigation.navigate("HomeScreen")}
+          onPress={() => navigation.navigate("Home" as never)}
         >
           <Ionicons name="home-outline" size={22} color="#999" />
           <Text style={styles.navText}>Home</Text>
@@ -158,24 +158,23 @@ const Transcripts: React.FC = () => {
 
         <TouchableOpacity
           style={[styles.navItem, styles.activeNav]}
-          onPress={() => navigation.navigate("Transcripts")}
+          onPress={() => navigation.navigate("Transcript" as never)}
         >
           <MaterialIcons name="article" size={22} color="#3A86FF" />
           <Text style={styles.navTextActive}>Transcripts</Text>
         </TouchableOpacity>
 
-       <TouchableOpacity
-  style={styles.navItem}
-  onPress={() => navigation.navigate("DevicePairing")}
->
-  <Ionicons name="hardware-chip-outline" size={22} color="#999" />
-  <Text style={styles.navText}>Devices</Text>
-</TouchableOpacity>
-
+        <TouchableOpacity
+          style={styles.navItem}
+          onPress={() => navigation.navigate("DevicePairing" as never)}
+        >
+          <Ionicons name="hardware-chip-outline" size={22} color="#999" />
+          <Text style={styles.navText}>Devices</Text>
+        </TouchableOpacity>
 
         <TouchableOpacity
           style={styles.navItem}
-          onPress={() => navigation.navigate("Premium")}
+          onPress={() => navigation.navigate("Premium" as never)}
         >
           <FontAwesome5 name="crown" size={20} color="#FFD700" />
           <Text style={[styles.navText, { color: "#FFD700" }]}>Premium</Text>
@@ -183,7 +182,7 @@ const Transcripts: React.FC = () => {
 
         <TouchableOpacity
           style={styles.navItem}
-          onPress={() => navigation.navigate("Settings")}
+          onPress={() => navigation.navigate("Settings" as never)}
         >
           <Ionicons name="settings-outline" size={22} color="#999" />
           <Text style={styles.navText}>Settings</Text>

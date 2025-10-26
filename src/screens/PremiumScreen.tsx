@@ -10,8 +10,17 @@ import {
 import Ionicons from "react-native-vector-icons/Ionicons";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import { useNavigation } from "@react-navigation/native";
+import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import type { RootStackParamList } from "../../App"; // adjust path if needed
+type PremiumScreenNavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  "Premium"
+>;  
+
 
 const PremiumScreen: React.FC = () => {
+  const navigation = useNavigation<PremiumScreenNavigationProp>();
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContent}>
@@ -94,33 +103,50 @@ const PremiumScreen: React.FC = () => {
         </View>
       </ScrollView>
 
-      {/* Bottom Navigation */}
-      <View style={styles.bottomNav}>
-        <TouchableOpacity style={styles.navItem}>
-          <Ionicons name="home-outline" size={22} color="#999" />
-          <Text style={styles.navText}>Home</Text>
-        </TouchableOpacity>
+      {/* ✅ Bottom Navigation */}
+<View style={styles.bottomNav}>
+  <TouchableOpacity
+    style={styles.navItem}
+    onPress={() => navigation.navigate("Home")}
+  >
+    <Ionicons name="home-outline" size={22} color="#999" />
+    <Text style={styles.navText}>Home</Text>
+  </TouchableOpacity>
 
-        <TouchableOpacity style={styles.navItem}>
-          <MaterialIcons name="article" size={22} color="#999" />
-          <Text style={styles.navText}>Transcripts</Text>
-        </TouchableOpacity>
+  <TouchableOpacity
+    style={styles.navItem}
+    onPress={() => navigation.navigate("Transcript")}
+  >
+    <MaterialIcons name="article" size={22} color="#999" />
+    <Text style={styles.navText}>Transcripts</Text>
+  </TouchableOpacity>
 
-        <TouchableOpacity style={styles.navItem}>
-          <Ionicons name="hardware-chip-outline" size={22} color="#999" />
-          <Text style={styles.navText}>Devices</Text>
-        </TouchableOpacity>
+  <TouchableOpacity
+    style={styles.navItem}
+    onPress={() => navigation.navigate("DevicePairing")}
+  >
+    <Ionicons name="hardware-chip-outline" size={22} color="#999" />
+    <Text style={styles.navText}>Devices</Text>
+  </TouchableOpacity>
 
-        <TouchableOpacity style={styles.navItem}>
-          <FontAwesome5 name="crown" size={20} color="#3A86FF" />
-          <Text style={styles.navTextActive}>Premium</Text>
-        </TouchableOpacity>
+  {/* 👑 Active Premium Tab */}
+  <TouchableOpacity
+    style={[styles.navItem, styles.activeNav]}
+    onPress={() => navigation.navigate("Premium")}
+  >
+    <FontAwesome5 name="crown" size={20} color="#3A86FF" />
+    <Text style={styles.navTextActive}>Premium</Text>
+  </TouchableOpacity>
 
-        <TouchableOpacity style={styles.navItem}>
-          <Ionicons name="settings-outline" size={22} color="#999" />
-          <Text style={styles.navText}>Settings</Text>
-        </TouchableOpacity>
-      </View>
+  <TouchableOpacity
+    style={styles.navItem}
+    onPress={() => navigation.navigate("Settings")}
+  >
+    <Ionicons name="settings-outline" size={22} color="#999" />
+    <Text style={styles.navText}>Settings</Text>
+  </TouchableOpacity>
+</View>
+
     </SafeAreaView>
   );
 };
@@ -303,19 +329,31 @@ const styles = StyleSheet.create({
     marginLeft: 8,
   },
   bottomNav: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    paddingVertical: 8,
-    borderTopWidth: 1,
-    borderColor: "#222",
-    backgroundColor: "#000",
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    right: 0,
-  },
-  navItem: { alignItems: "center" },
-  navText: { fontSize: 12, color: "#999" },
-  navTextActive: { fontSize: 12, color: "#3A86FF", fontWeight: "bold" },
+  flexDirection: "row",
+  justifyContent: "space-around",
+  alignItems: "center",
+  backgroundColor: "#111",
+  paddingVertical: 10,
+  borderTopWidth: 1,
+  borderTopColor: "#222",
+},
+navItem: {
+  alignItems: "center",
+},
+navText: {
+  fontSize: 12,
+  color: "#999",
+  marginTop: 4,
+},
+navTextActive: {
+  fontSize: 12,
+  color: "#3A86FF",
+  marginTop: 4,
+  fontWeight: "600",
+},
+activeNav: {
+  alignItems: "center",
+},
+
 });
 export default PremiumScreen;

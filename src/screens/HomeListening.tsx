@@ -100,35 +100,44 @@ const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>(
 </View>
 
 
-      {/* Bottom Navigation */}
+        {/* Bottom Navigation */}
       <View style={styles.bottomNav}>
-        <TouchableOpacity style={styles.navItem}>
+        <TouchableOpacity
+          style={styles.navItem}
+          onPress={() => navigation.navigate("Home" as never)}
+        >
           <Ionicons name="home" size={22} color="#4da6ff" />
           <Text style={styles.navLabelActive}>Home</Text>
         </TouchableOpacity>
 
-     <TouchableOpacity
-  style={styles.navItem}
-  onPress={() => navigation.navigate("Transcript")}
->
-  <Ionicons name="document-text-outline" size={22} color="#4da6ff" />
-  <Text style={styles.navLabelActive}>Transcripts</Text>
-</TouchableOpacity>
+        <TouchableOpacity
+          style={styles.navItem}
+          onPress={() => navigation.navigate("Transcript" as never)}
+        >
+          <Ionicons name="document-text-outline" size={22} color="#4da6ff" />
+          <Text style={styles.navLabelActive}>Transcripts</Text>
+        </TouchableOpacity>
 
-
-
-        <TouchableOpacity style={styles.navItem}>
+        <TouchableOpacity
+          style={styles.navItem}
+          onPress={() => navigation.navigate("DevicePairing" as never)}
+        >
           <Ionicons name="bluetooth-outline" size={22} color="#888" />
           <Text style={styles.navLabel}>Devices</Text>
         </TouchableOpacity>
 
-        {/* 👑 Premium Tab (Gold Crown) */}
-        <TouchableOpacity style={styles.navItem}>
+        <TouchableOpacity
+          style={styles.navItem}
+          onPress={() => navigation.navigate("Premium" as never)}
+        >
           <FontAwesome5 name="crown" size={20} color="#FFD700" />
           <Text style={[styles.navLabel, { color: "#FFD700" }]}>Premium</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.navItem}>
+        <TouchableOpacity
+          style={styles.navItem}
+          onPress={() => navigation.navigate("Settings" as never)}
+        >
           <Ionicons name="settings-outline" size={22} color="#888" />
           <Text style={styles.navLabel}>Settings</Text>
         </TouchableOpacity>
@@ -136,7 +145,6 @@ const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>(
     </View>
   );
 };
-
 export default HomeListening;
 
 const styles = StyleSheet.create({

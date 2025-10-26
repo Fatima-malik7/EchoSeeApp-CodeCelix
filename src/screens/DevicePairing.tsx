@@ -96,28 +96,42 @@ const DevicePairing: React.FC = () => {
 
       {/* ✅ Bottom Navigation Bar with Premium Crown */}
       <View style={styles.bottomNav}>
-        <TouchableOpacity style={styles.navItem}>
+        <TouchableOpacity
+          style={styles.navItem}
+          onPress={() => navigation.navigate("Home" as never)}
+        >
           <Ionicons name="home-outline" size={22} color="#999" />
           <Text style={styles.navText}>Home</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.navItem}>
+        <TouchableOpacity
+          style={styles.navItem}
+          onPress={() => navigation.navigate("Transcript" as never)}
+        >
           <MaterialIcons name="article" size={22} color="#999" />
           <Text style={styles.navText}>Transcripts</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.navItem}>
+        <TouchableOpacity
+          style={[styles.navItem, styles.activeNav]}
+          onPress={() => navigation.navigate("DevicePairing" as never)}
+        >
           <Ionicons name="hardware-chip-outline" size={22} color="#3A86FF" />
           <Text style={styles.navTextActive}>Devices</Text>
         </TouchableOpacity>
 
-        {/* 👑 Premium Tab */}
-        <TouchableOpacity style={styles.navItem}>
+        <TouchableOpacity
+          style={styles.navItem}
+          onPress={() => navigation.navigate("Premium" as never)}
+        >
           <FontAwesome5 name="crown" size={20} color="#FFD700" />
           <Text style={[styles.navText, { color: "#FFD700" }]}>Premium</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.navItem}>
+        <TouchableOpacity
+          style={styles.navItem}
+          onPress={() => navigation.navigate("Settings" as never)}
+        >
           <Ionicons name="settings-outline" size={22} color="#999" />
           <Text style={styles.navText}>Settings</Text>
         </TouchableOpacity>
@@ -125,7 +139,6 @@ const DevicePairing: React.FC = () => {
     </View>
   );
 };
-
 export default DevicePairing;
 
 const styles = StyleSheet.create({
@@ -247,9 +260,14 @@ const styles = StyleSheet.create({
     color: "#999",
     fontSize: 12,
   },
+
   navTextActive: {
     color: "#3A86FF",
     fontSize: 12,
     fontWeight: "bold",
+  },
+  activeNav: {
+    borderTopWidth: 2,
+    borderTopColor: "#3A86FF",
   },
 });

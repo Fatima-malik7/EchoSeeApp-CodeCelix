@@ -9,8 +9,15 @@ import {
 import Slider from "@react-native-community/slider";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-
+import { useNavigation } from "@react-navigation/native";
+import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import type { RootStackParamList } from "../../App"; // adjust path if needed
+type SettingsScreenNavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  "Settings"
+>;
 const SettingsScreen: React.FC = () => {
+  const navigation = useNavigation<SettingsScreenNavigationProp>();
   const [fontSize, setFontSize] = useState(14);
   const [language, setLanguage] = useState("English");
 
@@ -89,34 +96,50 @@ const SettingsScreen: React.FC = () => {
         </View>
       </ScrollView>
 
-      {/* ✅ Bottom Navigation Bar */}
-      <View style={styles.bottomNav}>
-        <TouchableOpacity style={styles.navItem}>
-          <Ionicons name="home-outline" size={22} color="#fff" />
-          <Text style={styles.navText}>Home</Text>
-        </TouchableOpacity>
+     {/* ✅ Bottom Navigation Bar */}
+<View style={styles.bottomNav}>
+  <TouchableOpacity
+    style={styles.navItem}
+    onPress={() => navigation.navigate("Home")}
+  >
+    <Ionicons name="home-outline" size={22} color="#999" />
+    <Text style={styles.navText}>Home</Text>
+  </TouchableOpacity>
 
-        <TouchableOpacity style={styles.navItem}>
-          <Ionicons name="document-text-outline" size={22} color="#fff" />
-          <Text style={styles.navText}>Transcripts</Text>
-        </TouchableOpacity>
+  <TouchableOpacity
+    style={styles.navItem}
+    onPress={() => navigation.navigate("Transcript")}
+  >
+    <Ionicons name="document-text-outline" size={22} color="#999" />
+    <Text style={styles.navText}>Transcripts</Text>
+  </TouchableOpacity>
 
-        <TouchableOpacity style={styles.navItem}>
-          <Ionicons name="bluetooth-outline" size={22} color="#fff" />
-          <Text style={styles.navText}>Devices</Text>
-        </TouchableOpacity>
+  <TouchableOpacity
+    style={styles.navItem}
+    onPress={() => navigation.navigate("DevicePairing")}
+  >
+    <Ionicons name="bluetooth-outline" size={22} color="#999" />
+    <Text style={styles.navText}>Devices</Text>
+  </TouchableOpacity>
 
-        {/* 🟡 Premium Icon (Crown) */}
-        <TouchableOpacity style={styles.navItem}>
-          <FontAwesome5 name="crown" size={20} color="#FFD700" />
-          <Text style={[styles.navText, { color: "#FFD700" }]}>Premium</Text>
-        </TouchableOpacity>
+  {/* 🟡 Premium Icon (Crown) */}
+  <TouchableOpacity
+    style={styles.navItem}
+    onPress={() => navigation.navigate("Premium")}
+  >
+    <FontAwesome5 name="crown" size={20} color="#FFD700" />
+    <Text style={[styles.navText, { color: "#FFD700" }]}>Premium</Text>
+  </TouchableOpacity>
 
-        <TouchableOpacity style={styles.navItemActive}>
-          <Ionicons name="settings" size={22} color="#3A82F7" />
-          <Text style={[styles.navText, { color: "#3A82F7" }]}>Settings</Text>
-        </TouchableOpacity>
-      </View>
+  <TouchableOpacity
+    style={[styles.navItem, styles.activeNav]}
+    onPress={() => navigation.navigate("Settings")}
+  >
+    <Ionicons name="settings" size={22} color="#3A82F7" />
+    <Text style={[styles.navTextActive]}>Settings</Text>
+  </TouchableOpacity>
+</View>
+
     </View>
   );
 };
@@ -210,26 +233,30 @@ const styles = StyleSheet.create({
     paddingHorizontal: 5,
   },
   bottomNav: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    alignItems: "center",
-    backgroundColor: "#000",
-    borderTopWidth: 1,
-    borderTopColor: "#222",
-    paddingVertical: 8,
-    position: "absolute",
-    bottom: 0,
-    width: "100%",
-  },
-  navItem: {
-    alignItems: "center",
-  },
-  navItemActive: {
-    alignItems: "center",
-  },
-  navText: {
-    color: "#fff",
-    fontSize: 12,
-    marginTop: 3,
-  },
+  flexDirection: "row",
+  justifyContent: "space-around",
+  alignItems: "center",
+  backgroundColor: "#111",
+  paddingVertical: 10,
+  borderTopWidth: 1,
+  borderTopColor: "#222",
+},
+navItem: {
+  alignItems: "center",
+},
+navText: {
+  fontSize: 12,
+  color: "#999",
+  marginTop: 4,
+},
+navTextActive: {
+  fontSize: 12,
+  color: "#3A82F7",
+  marginTop: 4,
+  fontWeight: "600",
+},
+activeNav: {
+  alignItems: "center",
+},
+
 });

@@ -9,8 +9,18 @@ import {
 import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../../App"; // ✅ adjust path if needed
+
+type DevicePairingScreenNavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  "DevicePairingScreen"
+>;
 
 const DevicePairingScreen: React.FC = () => {
+  const navigation = useNavigation<DevicePairingScreenNavigationProp>();
+
   const bluetoothDevices = [
     { id: 1, name: "iPhone 15 Pro", status: "Available" },
     { id: 2, name: "Samsung Galaxy Buds", status: "Available" },
@@ -108,30 +118,44 @@ const DevicePairingScreen: React.FC = () => {
         ))}
       </ScrollView>
 
-      {/* Bottom Navigation */}
+      {/* ✅ Bottom Navigation */}
       <View style={styles.bottomNav}>
-        <TouchableOpacity style={styles.navItem}>
+        <TouchableOpacity
+          style={styles.navItem}
+          onPress={() => navigation.navigate("Home")}
+        >
           <Ionicons name="home-outline" size={22} color="#999" />
           <Text style={styles.navText}>Home</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.navItem}>
+        <TouchableOpacity
+          style={styles.navItem}
+          onPress={() => navigation.navigate("Transcript")}
+        >
           <MaterialIcons name="article" size={22} color="#999" />
           <Text style={styles.navText}>Transcripts</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.navItem}>
+        <TouchableOpacity
+          style={[styles.navItem, styles.activeNav]}
+          onPress={() => navigation.navigate("DevicePairing")}
+        >
           <Ionicons name="hardware-chip-outline" size={22} color="#3A86FF" />
           <Text style={styles.navTextActive}>Devices</Text>
         </TouchableOpacity>
 
-        {/* 👑 Premium Crown Icon */}
-        <TouchableOpacity style={styles.navItem}>
+        <TouchableOpacity
+          style={styles.navItem}
+          onPress={() => navigation.navigate("Premium")}
+        >
           <FontAwesome5 name="crown" size={20} color="#FFD700" />
           <Text style={[styles.navText, { color: "#FFD700" }]}>Premium</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.navItem}>
+        <TouchableOpacity
+          style={styles.navItem}
+          onPress={() => navigation.navigate("Settings")}
+        >
           <Ionicons name="settings-outline" size={22} color="#999" />
           <Text style={styles.navText}>Settings</Text>
         </TouchableOpacity>
@@ -146,30 +170,32 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#000",
-    paddingHorizontal: 15,
-    paddingTop: 40,
   },
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: 15,
+    padding: 20,
   },
   headerTitle: {
+    fontSize: 22,
+    fontWeight: "700",
     color: "#fff",
-    fontSize: 20,
-    fontWeight: "bold",
   },
   scrollContainer: {
+    paddingHorizontal: 20,
     paddingBottom: 100,
   },
-
   connectedCard: {
-    backgroundColor: "#3A86FF",
+    backgroundColor: "#111",
     borderRadius: 12,
     padding: 15,
-    marginBottom: 15,
-    position: "relative",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 20,
+    borderWidth: 1,
+    borderColor: "#1A1A1A",
   },
   connectedInfo: {
     flexDirection: "row",
@@ -177,99 +203,90 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   connectedStatus: {
-    color: "#E0E0E0",
+    color: "#999",
     fontSize: 13,
   },
   connectButtonActive: {
-    position: "absolute",
-    right: 15,
-    top: 18,
-    backgroundColor: "#1A1A1A",
-    paddingHorizontal: 15,
-    paddingVertical: 6,
-    borderRadius: 6,
+    backgroundColor: "#3A86FF",
+    borderRadius: 8,
+    paddingVertical: 8,
+    paddingHorizontal: 18,
+  },
+  connectButton: {
+    backgroundColor: "#3A86FF",
+    borderRadius: 8,
+    paddingVertical: 8,
+    paddingHorizontal: 18,
+  },
+  connectButtonWifi: {
+    backgroundColor: "#00C851",
+    borderRadius: 8,
+    paddingVertical: 8,
+    paddingHorizontal: 18,
+  },
+  connectText: {
+    color: "#fff",
+    fontWeight: "600",
   },
   checkIcon: {
-    position: "absolute",
-    right: 20,
-    bottom: 15,
+    marginLeft: 8,
   },
-
   actionRow: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: 15,
+    marginBottom: 25,
   },
   actionButton: {
-    flex: 1,
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#1E90FF",
-    padding: 10,
-    marginHorizontal: 5,
+    backgroundColor: "#3A86FF",
     borderRadius: 10,
-    gap: 6,
+    paddingVertical: 12,
+    paddingHorizontal: 18,
+    flex: 1,
+    marginRight: 10,
   },
   actionText: {
     color: "#fff",
-    fontSize: 13,
+    marginLeft: 8,
     fontWeight: "600",
   },
-
   sectionHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginVertical: 10,
+    marginBottom: 10,
   },
   sectionTitle: {
     color: "#fff",
     fontSize: 16,
     fontWeight: "600",
   },
-
   deviceCard: {
     backgroundColor: "#111",
-    borderRadius: 10,
+    borderRadius: 12,
+    padding: 15,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    padding: 12,
-    marginBottom: 10,
+    marginBottom: 12,
+    borderWidth: 1,
+    borderColor: "#1A1A1A",
   },
   deviceInfo: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 10,
+    gap: 12,
   },
   deviceName: {
     color: "#fff",
     fontSize: 15,
-    fontWeight: "600",
+    fontWeight: "500",
   },
   deviceStatus: {
-    color: "#aaa",
-    fontSize: 12,
-  },
-  connectButton: {
-    backgroundColor: "#3A86FF",
-    paddingHorizontal: 15,
-    paddingVertical: 6,
-    borderRadius: 6,
-  },
-  connectButtonWifi: {
-    backgroundColor: "#00C851",
-    paddingHorizontal: 15,
-    paddingVertical: 6,
-    borderRadius: 6,
-  },
-  connectText: {
-    color: "#fff",
+    color: "#999",
     fontSize: 13,
-    fontWeight: "600",
   },
-
   bottomNav: {
     flexDirection: "row",
     justifyContent: "space-around",
@@ -289,5 +306,9 @@ const styles = StyleSheet.create({
     color: "#3A86FF",
     fontSize: 12,
     fontWeight: "bold",
+  },
+  activeNav: {
+    borderTopWidth: 2,
+    borderTopColor: "#3A86FF",
   },
 });

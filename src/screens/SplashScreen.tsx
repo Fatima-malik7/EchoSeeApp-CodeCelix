@@ -1,65 +1,63 @@
-import React, { useEffect } from "react";
-import { View, ImageBackground, StyleSheet, Text, ActivityIndicator } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import type { RootStackParamList } from "../../App";
+import React, { useRef } from 'react';
+import { StyleSheet, View, Dimensions, Animated } from 'react-native';
+import Video from 'react-native-video';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { useNavigation } from '@react-navigation/native';
 
-type SplashScreenNavigationProp = NativeStackNavigationProp<
-RootStackParamList,
-"Login"
-
->;
-
-const SplashScreen: React.FC = () => {
-const navigation = useNavigation<SplashScreenNavigationProp>();
-
-useEffect(() => {
-const timer = setTimeout(() => {
-navigation.replace("Login");
-}, 2500); // 2.5 seconds delay
-
-return () => clearTimeout(timer);
-
-
-}, [navigation]);
-
-return (
-<ImageBackground
-source={require("../../assets/splash-bg.png")}
-style={styles.background}
-resizeMode="cover"
->
-<View style={styles.overlay}>
-<Text style={styles.title}>EchoSee</Text>
-<ActivityIndicator size="large" color="#fff" style={styles.indicator} />
-</View>
-</ImageBackground>
-);
+type RootStackParamList = {
+  Splash: undefined;
+  Login: undefined;
 };
 
+type SplashScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Splash'>;
 
-export default SplashScreen;
+const { width, height } = Dimensions.get('window');
+
+const SplashScreen: React.FC = () => {
+  const navigation = useNavigation<SplashScreenNavigationProp>();
+
+  // 👇 Step 1: Create fade animation reference
+  const fadeAnim = useRef(new Animated.Value(1)).current;
+
+  // 👇 Step 2: Handle video end with fade-out animation
+  const handleVideoEnd = () => {
+    Animated.timing(fadeAnim, {
+      toValue: 0, // fade out
+      duration: 800, // 0.8 seconds
+      useNativeDriver: true,
+    }).start(() => {
+      navigation.replace('Login'); // navigate after fade out
+    });
+  };
+
+  return (
+    <View style={styles.container}>
+      {/* 👇 Step 3: Wrap video in Animated.View */}
+      <Animated.View style={{ opacity: fadeAnim }}>
+        <Video
+          source={require('../assets/EchoSee.mp4')} 
+          style={styles.backgroundVideo}
+          resizeMode="cover"
+          onEnd={handleVideoEnd}
+          muted={false}
+          repeat={false}
+          playInBackground={false}
+          playWhenInactive={false}
+        />
+      </Animated.View>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
-background: {
-flex: 1,
-justifyContent: "center",
-alignItems: "center",
-},
-overlay: {
-backgroundColor: "rgba(0,0,0,0.5)",
-width: "100%",
-height: "100%",
-justifyContent: "center",
-alignItems: "center",
-},
-title: {
-fontSize: 40,
-color: "#fff",
-fontWeight: "bold",
-letterSpacing: 1.5,
-},
-indicator: {
-marginTop: 20,
-},
+  container: {
+    flex: 1,
+    backgroundColor: 'black',
+  },
+  backgroundVideo: {
+    width: width,
+    height: height,
+  },
 });
+
+export default SplashScreen;

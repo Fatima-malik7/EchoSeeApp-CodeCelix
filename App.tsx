@@ -4,6 +4,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
+import SplashScreen from "./src/screens/SplashScreen"; // 👈 Added splash screen
 import LoginScreen from "./src/screens/LoginScreen";
 import Signup from "./src/screens/Signup";
 import HomeScreen from "./src/screens/HomeScreen";
@@ -25,6 +26,7 @@ export type Transcript = {
 };
 
 export type RootStackParamList = {
+  Splash: undefined; // 👈 Added splash route type
   Login: undefined;
   Signup: undefined;
   Home: undefined;
@@ -45,9 +47,12 @@ const App: React.FC = () => {
       <NavigationContainer>
         <StatusBar barStyle="light-content" backgroundColor="#000" />
         <Stack.Navigator
-          initialRouteName="Signup"
+          initialRouteName="Splash" // 👈 Run Splash first
           screenOptions={{ headerShown: false }}
         >
+          {/* 👇 Added splash screen */}
+          <Stack.Screen name="Splash" component={SplashScreen} />
+
           <Stack.Screen name="Login" component={LoginScreen} />
           <Stack.Screen name="Signup" component={Signup} />
           <Stack.Screen name="Home" component={HomeScreen} />
